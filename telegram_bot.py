@@ -1,51 +1,31 @@
 import os
-import time
 import telegram
 import argparse
 from environs import Env
 import random
+from main_functions import get_path_files
 
 
-def upload_images_to_telegram(token, chat_name, files, interval):
+def upload_images_to_telegram(token, chat_name, files):
     
     bot = telegram.Bot(token = token)
-    
-    for file in files:
-        
-        bot.send_photo(
-            chat_id = chat_name,
-            photo = open(file, "rb"),
-            timeout = 300
-        )
-
-        time.sleep(interval)
-
+    bot.send_photo(chat_id = chat_name, photo = open(files, "rb"), timeout = 300)
 
 def main():
 
     env = Env()
     env.read_env()
 
-    namefiles = []
-
-    parser = argparse.ArgumentParser(description="Бот публикует картинки в телеграм канал раз в интервал")
-    parser.add_argument("-s", help="Интервал в секундах")
+    parser = argparse.ArgumentParser(description="Бот публикует картинки в телеграм канал")
+    parser.add_argument("-p", help="Путь к картинке")
     args = parser.parse_args()
 
-    if args.s: 
-        interval = int(args.s)
+    if args.p: 
+        file = args.p
     else: 
-        interval = env.int('INTERVAL')
-    
+        file = random.choice(get_path_files(env.str('DIRECTORY')))
 
-    for root, __, files in os.walk(env.str('DIRECTORY')):
-        for file in files:
-            namefiles.append(os.path.join(root, file))
-    print(namefiles)
-  
-    while True:
-        random.shuffle(files)
-        upload_images_to_telegram(env.str('TELEGRAM_TOKEN'), env.str('CHAT_NAME'), namefiles, interval)
+    upload_images_to_telegram(env.str('TELEGRAM_TOKEN'), env.str('CHAT_NAME'), file)
 
 if __name__ == "__main__":
 
