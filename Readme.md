@@ -31,7 +31,7 @@ DIRECTORY = Директория картинок
 ```python fetch_spacex_last_launсh.py -s 'ID Запуска'``` 
 
 Скачиваем 50 фотографий NASA APOD
-```python fetch_nasa_apod.py```
+ ```python fetch_nasa_apod.py```
 
 Скачиваем последнии фотографии земли NASA EPIC
 ```python fetch_nasa_epic.py```
