@@ -25,25 +25,25 @@ DIRECTORY = Директория картинок
 ### Как использовать
 
 Скачиваем фотографии последнего запуска ракет SpaceX
-`python fetch_spacex_last_launсh.py` 
+```python fetch_spacex_last_launсh.py``` 
 
 Скачать фотографии можно по ID запуска ракеты
-`python fetch_spacex_last_launсh.py -s 'ID Запуска'` 
+```python fetch_spacex_last_launсh.py -s 'ID Запуска'``` 
 
 Скачиваем 50 фотографий NASA APOD
-`python fetch_nasa_apod.py`
+```python fetch_nasa_apod.py```
 
 Скачиваем последнии фотографии земли NASA EPIC
-`python fetch_nasa_epic.py`
+```python fetch_nasa_epic.py```
 
 Публикуем случайное фотографию в Телеграм канал
-`python telegram_bot.py`
+```python telegram_bot.py```
 
 Публикуем фотографию в Телеграм канал
-`python telegram_bot.py -p 'Путь к фотографии'`
+```python telegram_bot.py -p 'Путь к фотографии'```
 
 Публикуем случайные фотографии каждые 4 часа 
-`python send_images.py` отправляет картинки в телеграм канал по времени
+```python send_images.py``` отправляет картинки в телеграм канал по времени
 
 Публикуем случайные фотографии указанное время в секуднах
-`python send_images.py -s 'секунды' ` отправляет картинки в телеграм канал по времени
+```python send_images.py -s 'секунды'``` отправляет картинки в телеграм канал по времени
