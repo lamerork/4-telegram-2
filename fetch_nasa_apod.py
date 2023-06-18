@@ -12,13 +12,13 @@ def get_nasa_days_pictures(token, count, dirname):
     }
     response = requests.get(url, params = payload)
     response.raise_for_status()
-    nasa_json = response.json()
+    nasa_images = response.json()
 
-    for i, nasa in enumerate(nasa_json):
+    for index, nasa_image in enumerate(nasa_images):
 
-        ext = get_extension(nasa["url"])
-        file_name = f"{dirname}/apod_{i}{ext}"
-        get_image(nasa["url"], file_name)
+        ext = get_extension(nasa_image["url"])
+        file_name = f"{dirname}/apod_{index}{ext}"
+        get_image(nasa_image["url"], file_name)
 
 
 def main():

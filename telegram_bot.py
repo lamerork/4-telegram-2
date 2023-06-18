@@ -1,4 +1,3 @@
-import os
 import telegram
 import argparse
 from environs import Env
@@ -6,10 +5,11 @@ import random
 from main_functions import get_path_files
 
 
-def upload_image_to_telegram(token, chat_name, files):
+def upload_image_to_telegram(token, chat_name, file_name):
     
     bot = telegram.Bot(token = token)
-    bot.send_photo(chat_id = chat_name, photo = open(files, "rb"), timeout = 300)
+    with open(file_name, "rb") as file:
+        bot.send_photo(chat_id = chat_name, photo = file, timeout = 300)
 
 def main():
 
@@ -17,15 +17,13 @@ def main():
     env.read_env()
 
     parser = argparse.ArgumentParser(description="Бот публикует картинки в телеграм канал")
-    parser.add_argument("-p", help="Путь к картинке")
+    parser.add_argument("-p", help="Путь к картинке", default=random.choice(get_path_files(env.str('DIRECTORY'))))
     args = parser.parse_args()
 
-    if args.p: 
-        file = args.p
-    else: 
-        file = random.choice(get_path_files(env.str('DIRECTORY')))
+  
+    file_name = args.p
 
-    upload_image_to_telegram(env.str('TELEGRAM_TOKEN'), env.str('CHAT_NAME'), file)
+    upload_image_to_telegram(env.str('TELEGRAM_TOKEN'), env.str('CHAT_NAME'), file_name)
 
 if __name__ == "__main__":
 

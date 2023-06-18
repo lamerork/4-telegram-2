@@ -11,13 +11,11 @@ def main():
     env.read_env()
 
     parser = argparse.ArgumentParser(description="Бот публикует картинки в телеграм канал")
-    parser.add_argument("-s", help="Интервал в секундах")
+    parser.add_argument("-s", help="Интервал в секундах", default=env.int('INTERVAL'))
     args = parser.parse_args()
 
-    if args.s: 
-        interval = int(args.s)
-    else: 
-        interval = env.int('INTERVAL')
+
+    interval = int(args.s)
 
     files = get_path_files(env.str('DIRECTORY'))
 

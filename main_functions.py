@@ -3,14 +3,11 @@ import requests
 from urllib.parse import urlparse
 
 def get_path_files(path):
-    files_name = []
+    file_names = []
     for root, __, files in os.walk(path):
         for file in files:
-            files_name.append(os.path.join(root, file))
-    return files_name
-
-def create_dirs(dirname):
-        os.makedirs(dirname, exist_ok=True)
+            file_names.append(os.path.join(root, file))
+    return file_names
 
 def get_image(url, filepath):
     response = requests.get(url)
