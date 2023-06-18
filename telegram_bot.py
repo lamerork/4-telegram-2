@@ -6,7 +6,7 @@ import random
 from main_functions import get_path_files
 
 
-def upload_images_to_telegram(token, chat_name, files):
+def upload_image_to_telegram(token, chat_name, files):
     
     bot = telegram.Bot(token = token)
     bot.send_photo(chat_id = chat_name, photo = open(files, "rb"), timeout = 300)
@@ -25,7 +25,7 @@ def main():
     else: 
         file = random.choice(get_path_files(env.str('DIRECTORY')))
 
-    upload_images_to_telegram(env.str('TELEGRAM_TOKEN'), env.str('CHAT_NAME'), file)
+    upload_image_to_telegram(env.str('TELEGRAM_TOKEN'), env.str('CHAT_NAME'), file)
 
 if __name__ == "__main__":
 
