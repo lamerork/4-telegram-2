@@ -22,12 +22,3 @@ def get_image(url, filepath):
 def get_extension(url):
     url_parsed = urlparse(url)
     return os.path.splitext(url_parsed.path)[1]
-
-
-def main():
-    dir_name = "images"
-    
-    create_dirs(dir_name)
-
-if __name__ == "__main__":
-    main()
